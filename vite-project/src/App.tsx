@@ -25,10 +25,18 @@ function App() {
     setProduct([product, ...products]);
   };
 
+  const handleDelete = (id: number) => {
+    setProduct(products.filter((product, index) => index !== id));
+  };
+
   return (
     <Fragment>
       <Form categories={categories} onFormSubmit={handleFormSubmit} />
-      <ProductList products={products} />
+      <ProductList
+        products={products}
+        onDelete={handleDelete}
+        categories={categories}
+      />
     </Fragment>
   );
 }
