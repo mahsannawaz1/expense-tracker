@@ -2,9 +2,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import Form from "./components/Form";
 import { FieldValues } from "react-hook-form";
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import ProductList from "./components/ProductList";
 
-interface Product {
+export interface Product {
   description: string;
   amount: number;
   category: string;
@@ -21,10 +22,15 @@ function App() {
       amount: data.amount,
       category: data.category,
     };
-    setProduct([...products, product]);
+    setProduct([product, ...products]);
   };
 
-  return <Form categories={categories} onFormSubmit={handleFormSubmit} />;
+  return (
+    <Fragment>
+      <Form categories={categories} onFormSubmit={handleFormSubmit} />
+      <ProductList products={products} />
+    </Fragment>
+  );
 }
 
 export default App;
